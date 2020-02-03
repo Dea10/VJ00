@@ -65,7 +65,8 @@ public class GameRegisterActivity extends AppCompatActivity {
         game_credits = Integer.valueOf(et_game_credits.getText().toString());
 
         Game game = new Game(game_name, platform, false, game_credits, game_cost);
-        key = game_name;
+        //key = game_name;
+        key = mDatabase.child("juegos").push().getKey();
 
         Map<String, Object> gameValues = game.toMap();
 
