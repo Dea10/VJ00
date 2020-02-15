@@ -2,9 +2,11 @@ package com.dea.vj00;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,7 +33,7 @@ public class GameRegisterActivity extends AppCompatActivity {
     public DatabaseReference gameCreditsRef = database.getReference("creditos_juego");
 
     public String ref = "/juegos/";
-    public String listRef = "/titulo_juego/";
+    public String listRef = "/game_list/";
     public String costRef = "/costo_juego/";
     public String creditsRef = "/creditos_juego/";
 
@@ -54,17 +56,18 @@ public class GameRegisterActivity extends AppCompatActivity {
     public void writeNewGame(View view) {
         String key;
         String game_name;
-        String platform;
+        String game_platform;
         //Date purchase_date = new Date(1970,01,01);
         Double game_cost;
         Integer game_credits;
 
         game_name = et_game_name.getText().toString();
-        platform = et_platform.getText().toString();
+        game_platform = et_platform.getText().toString();
         game_cost = Double.valueOf(et_game_cost.getText().toString());
         game_credits = Integer.valueOf(et_game_credits.getText().toString());
 
-        Game game = new Game(game_name, platform, false, game_credits, game_cost);
+        Game game = new Game(game_name, game_platform, false, game_credits, game_cost);
+        GameListElement gameListElement = new GameListElement(game_name, game_platform);
         //key = game_name;
         key = mDatabase.child("juegos").push().getKey();
 
@@ -72,17 +75,14 @@ public class GameRegisterActivity extends AppCompatActivity {
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(ref + key, gameValues);
-        childUpdates.put(listRef + key, game_name);
+        childUpdates.put(listRef + key, gameListElement);
         childUpdates.put(costRef + key, game_cost);
         childUpdates.put(creditsRef + key, game_credits);
 
         mDatabase.updateChildren(childUpdates);
 
-        /*
-        gameRef.push().setValue(game);
-        gameListRef.push().setValue(game_name);
-        gameCostRef.push().setValue(game_cost);
-        gameCreditsRef.push().setValue(game_credits);
-         */
+        Toast.makeText(this, "New game added!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

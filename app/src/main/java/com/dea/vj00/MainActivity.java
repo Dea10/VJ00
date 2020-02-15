@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements GameListAdapter.I
 
 
     public ArrayList<Game> games = new ArrayList<>();
-    public ArrayList<String> titulos = new ArrayList<>();
+    public ArrayList<GameListElement> game_list_array = new ArrayList<>();
     public ArrayList<String> id = new ArrayList<>();
 
     private String TAG = MainActivity.class.getName();
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements GameListAdapter.I
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "Clicked: " + mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "Clicked: " + mAdapter.getItem(position), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, GameDetailActivity.class);
         intent.putExtra("EXTRA_GAME_ID", mAdapter.getItem(position));
         startActivity(intent);
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements GameListAdapter.I
         final GameListAdapter.ItemClickListener test = this;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("titulo_juego");
+        DatabaseReference myRef = database.getReference("game_list");
 
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
@@ -72,12 +72,12 @@ public class MainActivity extends AppCompatActivity implements GameListAdapter.I
                 Log.d(TAG, "onChildAdded: " + dataSnapshot.getKey());
 
 
-                String incoming = dataSnapshot.getValue(String.class);
+                GameListElement incoming = dataSnapshot.getValue(GameListElement.class);
                 game_id = dataSnapshot.getKey();
                 //Log.d(TAG, incoming);
-                titulos.add(incoming);
+                game_list_array.add(incoming);
                 id.add(game_id);
-                mAdapter = new GameListAdapter(mContext, titulos, id);
+                mAdapter = new GameListAdapter(mContext, game_list_array, id);
                 mAdapter.setClickListener(test);
                 recyclerView.setAdapter(mAdapter);
             }

@@ -55,9 +55,9 @@ public class GameDetailActivity extends AppCompatActivity {
                 // Get Post object and use the values to update the UI
                 Game game = dataSnapshot.getValue(Game.class);
                 tv_game_name.setText(game.name);
-                tv_game_status.setText(game.isFinished.toString());
-                tv_game_cost.setText(game.cost.toString());
-                tv_game_credits.setText(game.credits.toString());
+                tv_game_status.setText("Finished: " + game.isFinished.toString());
+                tv_game_cost.setText("Cost: $" + game.cost.toString());
+                tv_game_credits.setText("Credits: " + game.credits.toString());
             }
 
             @Override

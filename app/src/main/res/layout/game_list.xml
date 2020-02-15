@@ -19,7 +19,15 @@
                 android:id="@+id/tv_game_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie nisi dui. "
+                android:text="VG"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/tv_game_platform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_game_name"
+                android:text="Platform: "
                 android:textAppearance="?android:textAppearanceMedium" />
 
         </RelativeLayout>

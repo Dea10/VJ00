@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.MyViewHolder> {
-    private List<String> mDataset;
+    private List<GameListElement> mDataset;
     private List<String> mIdDataset;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
@@ -25,7 +25,10 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.MyView
 
     @Override
     public void onBindViewHolder(GameListAdapter.MyViewHolder holder, int position) {
-        String game_name = mDataset.get(position);
+        String game_name = mDataset.get(position).game_name;
+        String game_platform = mDataset.get(position).game_platform;
+
+        holder.tv_game_platform.setText("Platform: " + game_platform);
         holder.tv_game_name.setText(game_name);
     }
 
@@ -36,10 +39,13 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tv_game_name;
+        public TextView tv_game_platform;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             tv_game_name = itemView.findViewById(R.id.tv_game_name);
+            tv_game_platform = itemView.findViewById(R.id.tv_game_platform);
+
             this.itemView.setOnClickListener(this);
         }
 
@@ -51,7 +57,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.MyView
         }
     }
 
-    public GameListAdapter(Context context, List<String> games, List<String> ids) {
+    public GameListAdapter(Context context, List<GameListElement> games, List<String> ids) {
         this.mInflater = LayoutInflater.from(context);
         this.mDataset = games;
         this.mIdDataset = ids;
