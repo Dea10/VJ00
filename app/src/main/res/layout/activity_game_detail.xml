@@ -19,7 +19,7 @@
                 android:id="@+id/tv_game_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie nisi dui. "
+                android:text="Game Title"
                 android:textAppearance="?android:textAppearanceLarge" />
 
             <TextView
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_game_name"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie nisi dui. "
+                android:text="Status: "
                 android:textAppearance="?android:textAppearanceMedium" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_game_status"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie nisi dui. "
+                android:text="Cost: $"
                 android:textAppearance="?android:textAppearanceMedium" />
 
             <TextView
@@ -43,8 +43,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_game_cost"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie nisi dui. "
+                android:text="Credits: "
                 android:textAppearance="?android:textAppearanceMedium" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_game_credits"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <RadioButton
+                    android:id="@+id/radio_not_started"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Not started yet" />
+
+                <RadioButton
+                    android:id="@+id/radio_started"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Started" />
+
+                <RadioButton
+                    android:id="@+id/radio_finished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Finished" />
+            </RadioGroup>
 
         </RelativeLayout>
 

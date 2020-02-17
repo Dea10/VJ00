@@ -1,4 +1,4 @@
-package com.dea.vj00;
+package com.dea.vj00.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dea.vj00.POJOs.Game;
+import com.dea.vj00.POJOs.GameListElement;
+import com.dea.vj00.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,12 +27,12 @@ public class GameRegisterActivity extends AppCompatActivity {
 
     public final FirebaseDatabase database = FirebaseDatabase.getInstance();
     public DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    public DatabaseReference gameRef = database.getReference("juegos");
+    public DatabaseReference gameRef = database.getReference("games");
     public DatabaseReference gameListRef = database.getReference("titulo_juego");
     public DatabaseReference gameCostRef = database.getReference("costo_juego");
     public DatabaseReference gameCreditsRef = database.getReference("creditos_juego");
 
-    public String ref = "/juegos/";
+    public String ref = "/games/";
     public String listRef = "/game_list/";
     public String costRef = "/costo_juego/";
     public String creditsRef = "/creditos_juego/";
@@ -66,10 +66,10 @@ public class GameRegisterActivity extends AppCompatActivity {
         game_cost = Double.valueOf(et_game_cost.getText().toString());
         game_credits = Integer.valueOf(et_game_credits.getText().toString());
 
-        Game game = new Game(game_name, game_platform, false, game_credits, game_cost);
-        GameListElement gameListElement = new GameListElement(game_name, game_platform);
+        Game game = new Game(game_name, game_platform, "not_started", game_credits, game_cost);
+        GameListElement gameListElement = new GameListElement(game_name, game_platform, "not_started");
         //key = game_name;
-        key = mDatabase.child("juegos").push().getKey();
+        key = mDatabase.child("games").push().getKey();
 
         Map<String, Object> gameValues = game.toMap();
 
@@ -82,7 +82,7 @@ public class GameRegisterActivity extends AppCompatActivity {
         mDatabase.updateChildren(childUpdates);
 
         Toast.makeText(this, "New game added!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, GameListActivity.class);
         startActivity(intent);
     }
 }

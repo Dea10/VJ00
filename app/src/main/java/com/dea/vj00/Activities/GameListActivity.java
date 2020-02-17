@@ -1,4 +1,4 @@
-package com.dea.vj00;
+package com.dea.vj00.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
+import com.dea.vj00.Adapters.GameListAdapter;
+import com.dea.vj00.POJOs.Game;
+import com.dea.vj00.POJOs.GameListElement;
+import com.dea.vj00.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,10 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements GameListAdapter.ItemClickListener {
+public class GameListActivity extends AppCompatActivity implements GameListAdapter.ItemClickListener {
 
     private RecyclerView recyclerView;
-    //private RecyclerView.Adapter mAdapter;
     GameListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private Context mContext = this;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements GameListAdapter.I
     public ArrayList<GameListElement> game_list_array = new ArrayList<>();
     public ArrayList<String> id = new ArrayList<>();
 
-    private String TAG = MainActivity.class.getName();
+    private String TAG = GameListActivity.class.getName();
     public String game_id;
 
     @Override
@@ -71,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements GameListAdapter.I
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.d(TAG, "onChildAdded: " + dataSnapshot.getKey());
 
-
                 GameListElement incoming = dataSnapshot.getValue(GameListElement.class);
                 game_id = dataSnapshot.getKey();
                 //Log.d(TAG, incoming);
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements GameListAdapter.I
                 mAdapter = new GameListAdapter(mContext, game_list_array, id);
                 mAdapter.setClickListener(test);
                 recyclerView.setAdapter(mAdapter);
+               // recyclerView.setLayoutManager(new LinearLayoutManager());
             }
 
             @Override

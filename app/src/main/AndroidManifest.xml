@@ -11,9 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".GameDetailActivity"></activity>
-        <activity android:name=".GameRegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.GameDetailActivity"></activity>
+        <activity android:name=".Activities.GameRegisterActivity" />
+        <activity android:name=".Activities.GameListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
