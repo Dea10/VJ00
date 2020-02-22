@@ -73,7 +73,7 @@ public class GameDetailActivity extends AppCompatActivity {
                 game_status = game.game_status;
 
                 tv_game_name.setText(game.name);
-                tv_game_status.setText("Finished: " + game.game_status);
+                tv_game_status.setText("Status: " + game.game_status);
                 tv_game_cost.setText("Cost: $" + game.cost.toString());
                 tv_game_credits.setText("Credits: " + game.credits.toString());
 

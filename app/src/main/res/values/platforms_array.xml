@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="planets_array">
+        <item>PC</item>
+        <item>Nintendo Switch</item>
+        <item>Android</item>
+        <item>Nintendo DS</item>
+    </string-array>
+</resources>

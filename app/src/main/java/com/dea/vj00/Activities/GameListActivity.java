@@ -32,8 +32,8 @@ public class GameListActivity extends AppCompatActivity implements GameListAdapt
 
 
     public ArrayList<Game> games = new ArrayList<>();
-    public ArrayList<GameListElement> game_list_array = new ArrayList<>();
-    public ArrayList<String> id = new ArrayList<>();
+    public ArrayList<GameListElement> games_array_list = new ArrayList<>();
+    public ArrayList<String> ids_array_list = new ArrayList<>();
 
     private String TAG = GameListActivity.class.getName();
     public String game_id;
@@ -75,18 +75,37 @@ public class GameListActivity extends AppCompatActivity implements GameListAdapt
 
                 GameListElement incoming = dataSnapshot.getValue(GameListElement.class);
                 game_id = dataSnapshot.getKey();
-                //Log.d(TAG, incoming);
-                game_list_array.add(incoming);
-                id.add(game_id);
-                mAdapter = new GameListAdapter(mContext, game_list_array, id);
+                games_array_list.add(incoming);
+                ids_array_list.add(game_id);
+                mAdapter = new GameListAdapter(mContext, games_array_list, ids_array_list);
                 mAdapter.setClickListener(test);
                 recyclerView.setAdapter(mAdapter);
-               // recyclerView.setLayoutManager(new LinearLayoutManager());
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Log.d(TAG, "onChildChanged: " + dataSnapshot.getKey());
+
+                //GameListElement gle = new GameListElement("Metal Slug 7", "Nintendo DS", "started");
+
+                GameListElement incoming = dataSnapshot.getValue(GameListElement.class);
+                game_id = dataSnapshot.getKey();
+
+                int pos = ids_array_list.indexOf(game_id);
+
+                games_array_list.set(pos, incoming);
+
+                //games_array_list.add(incoming);
+                //ids_array_list.add(game_id);
+                //mAdapter = new GameListAdapter(mContext, games_array_list, ids_array_list);
+                //mAdapter.setClickListener(test);
+                //recyclerView.setAdapter(mAdapter);
+
+                mAdapter = new GameListAdapter(mContext, games_array_list, ids_array_list);
+                mAdapter.setClickListener(test);
+                recyclerView.setAdapter(mAdapter);
+
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
